@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Middle East Market — Ottawa's Halal Butcher &amp; Souk Since 1992</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161109;
+    --ink-2:#211a12;
+    --ink-3:#2b2117;
+    --parchment:#f3e9d8;
+    --parchment-dim:#cfc0a4;
+    --brass:#c9973e;
+    --brass-bright:#e3b968;
+    --brass-dim:#8a6b2c;
+    --ember:#bd4028;
+    --ember-bright:#e0603c;
+    --olive:#707a4d;
+    --line: rgba(201,151,62,0.28);
+    --maxw: 1180px;
+    --serif: 'Marcellus', 'Times New Roman', serif;
+    --sans: 'Jost', 'Segoe UI', sans-serif;
+    --arabic: 'Aref Ruqaa', serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+
+  /* grain texture overlay */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:12.5px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--brass);
+    display:inline-block;
+  }
+  h1,h2,h3{font-family:var(--serif); font-weight:400; color:var(--parchment); letter-spacing:0.01em;}
+  h2{font-size:clamp(30px,4vw,46px); line-height:1.15; margin-top:14px;}
+  h3{font-size:22px;}
+  p{color:var(--parchment-dim); font-weight:300;}
+  .section{padding:110px 0;}
+  .section-tight{padding:70px 0;}
+  .center{text-align:center;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 30px;
+    font-family:var(--sans);
+    font-size:13px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform .35s ease, box-shadow .35s ease, background .35s ease, color .35s ease;
+    white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .btn-brass{
+    background:linear-gradient(180deg,var(--brass-bright),var(--brass-dim));
+    color:#181008;
+    box-shadow:0 8px 24px -8px rgba(201,151,62,0.55);
+  }
+  .btn-brass:hover{transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(201,151,62,0.7);} 
+  .btn-ghost{
+    border-color:var(--brass-dim);
+    color:var(--parchment);
+    background:transparent;
+  }
+  .btn-ghost:hover{border-color:var(--brass-bright); background:rgba(201,151,62,0.08); transform:translateY(-2px);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    padding:22px 0;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease, backdrop-filter .4s ease;
+  }
+  header.scrolled{
+    padding:14px 0;
+    background:rgba(20,15,9,0.86);
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px -18px rgba(0,0,0,0.7);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:42px; height:42px; flex-shrink:0;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-text .name{font-family:var(--serif); font-size:16.5px; letter-spacing:0.05em; color:var(--parchment);} 
+  .brand-text .est{font-size:10px; letter-spacing:0.2em; color:var(--brass); text-transform:uppercase; margin-top:3px;} 
+  .nav-links{display:flex; align-items:center; gap:38px;}
+  .nav-links a{
+    font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim);
+    position:relative; padding-bottom:4px; transition:color .3s ease;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; height:1px; width:0;
+    background:var(--brass); transition:width .3s ease;
+  }
+  .nav-links a:hover{color:var(--parchment);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:24px; height:1.5px; background:var(--parchment);} 
+  .mobile-panel{
+    display:none;
+    position:fixed; inset:0; z-index:999;
+    background:rgba(15,11,7,0.98);
+    flex-direction:column; align-items:center; justify-content:center; gap:32px;
+  }
+  .mobile-panel.open{display:flex;}
+  .mobile-panel a{font-family:var(--serif); font-size:26px;}
+  .mobile-close{position:absolute; top:26px; right:32px; font-size:28px; background:none; border:none; color:var(--parchment); cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:120px;
+    background:
+      radial-gradient(ellipse 900px 600px at 78% 18%, rgba(189,64,40,0.20), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 12% 85%, rgba(112,122,77,0.14), transparent 60%),
+      linear-gradient(180deg, #171009 0%, #14100a 60%, #120d08 100%);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.12;
+    -webkit-mask-image:radial-gradient(ellipse 700px 700px at 50% 30%, black, transparent 75%);
+            mask-image:radial-gradient(ellipse 700px 700px at 50% 30%, black, transparent 75%);
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
+  }
+  .hero-copy .eyebrow{margin-bottom:22px;}
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(42px,6.4vw,84px);
+    line-height:1.04;
+    color:var(--parchment);
+  }
+  .hero h1 em{font-style:normal; color:var(--brass-bright);} 
+  .hero p.lede{
+    margin-top:26px; max-width:480px; font-size:17.5px; color:var(--parchment-dim);
+  }
+  .hero-cta{margin-top:40px; display:flex; gap:18px; flex-wrap:wrap;}
+  .hero-seal{
+    margin-top:56px; display:flex; align-items:center; gap:16px;
+  }
+  .seal-ring{
+    width:74px; height:74px; border-radius:50%;
+    border:1px solid var(--brass-dim);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; flex-shrink:0;
+  }
+  .seal-ring::before{
+    content:""; position:absolute; inset:6px; border-radius:50%; border:1px dashed var(--brass);
+  }
+  .seal-ring span{font-family:var(--serif); font-size:11px; color:var(--brass-bright); text-align:center; line-height:1.2;}
+  .hero-seal .seal-text{font-size:12.5px; letter-spacing:0.06em; color:var(--parchment-dim); max-width:220px;}
+  .hero-seal .seal-text b{color:var(--parchment); font-weight:600;}
+
+  .ticket-float{
+    justify-self:end; position:relative;
+    background:linear-gradient(160deg,#2a2013,#1c150d);
+    border:1px solid var(--line);
+    padding:30px 26px 26px;
+    width:min(280px,90%);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.65);
+    transform:rotate(2.5deg);
+  }
+  .ticket-float::before, .ticket-float::after{
+    content:""; position:absolute; width:22px; height:22px; border-radius:50%;
+    background:var(--ink); top:50%; transform:translateY(-50%);
+  }
+  .ticket-float::before{left:-11px;}
+  .ticket-float::after{right:-11px;}
+  .ticket-dash{
+    border-top:1px dashed var(--brass-dim); margin:16px 0;
+  }
+  .ticket-float .tf-eyebrow{font-size:10.5px; letter-spacing:0.22em; color:var(--brass); text-transform:uppercase;}
+  .ticket-float .tf-number{font-family:var(--serif); font-size:44px; color:var(--parchment); margin-top:6px;}
+  .ticket-float .tf-note{font-size:12.5px; color:var(--parchment-dim); margin-top:14px; line-height:1.5;}
+  .scroll-cue{
+    position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    color:var(--parchment-dim); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase;
+    z-index:2;
+  }
+  .scroll-cue .line{width:1px; height:40px; background:linear-gradient(var(--brass), transparent); animation:pulse-line 2.4s ease-in-out infinite;}
+  @keyframes pulse-line{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    background:var(--ink-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .trust-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .trust-item{
+    padding:38px 20px; text-align:center;
+    border-left:1px solid var(--line);
+  }
+  .trust-item:first-child{border-left:none;}
+  .trust-num{font-family:var(--serif); font-size:34px; color:var(--brass-bright);}
+  .trust-label{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim); margin-top:6px;}
+
+  /* ---------- STORY ---------- */
+  .story-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:70px; align-items:start;}
+  .story-copy p{margin-top:20px; font-size:16px; max-width:520px;}
+  .pull-quote{
+    margin-top:38px;
+    font-family:var(--serif);
+    font-size:23px;
+    color:var(--brass-bright);
+    line-height:1.5;
+    padding-left:26px;
+    border-left:2px solid var(--brass);
+  }
+  .story-panels{display:flex; flex-direction:column; gap:20px;}
+  .story-panel{
+    position:relative;
+    border:1px solid var(--line);
+    padding:30px;
+    min-height:150px;
+    display:flex; align-items:flex-end;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(201,151,62,0.16), transparent 55%),
+      linear-gradient(140deg,#231b12,#191309);
+    overflow:hidden;
+  }
+  .story-panel .icon{position:absolute; top:24px; right:26px; width:34px; height:34px; opacity:0.9;}
+  .story-panel h3{font-size:17px; letter-spacing:0.04em; color:var(--parchment);} 
+  .story-panel span{display:block; font-size:12px; color:var(--parchment-dim); margin-top:6px; max-width:280px;}
+
+  /* ---------- DEPARTMENTS ---------- */
+  .dept-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:26px; margin-top:60px;
+  }
+  .ticket-card{
+    position:relative;
+    background:linear-gradient(160deg,#241b11,#1a1409);
+    border:1px solid var(--line);
+    padding:34px 26px 28px;
+    transition:transform .4s ease, border-color .4s ease;
+  }
+  .ticket-card:hover{transform:translateY(-6px); border-color:var(--brass);} 
+  .ticket-card::before, .ticket-card::after{
+    content:""; position:absolute; width:20px; height:20px; border-radius:50%;
+    background:var(--ink); top:50%; transform:translateY(-50%);
+  }
+  .ticket-card::before{left:-10px;}
+  .ticket-card::after{right:-10px;}
+  .ticket-card .icon{width:36px; height:36px; color:var(--brass); margin-bottom:22px;}
+  .ticket-card .tno{font-size:11px; letter-spacing:0.2em; color:var(--brass); text-transform:uppercase; margin-bottom:8px;}
+  .ticket-card h3{font-size:18.5px; margin-bottom:10px;}
+  .ticket-card p{font-size:14px; margin:0;}
+  .ticket-card .perf{border-top:1px dashed var(--brass-dim); margin-top:22px; padding-top:14px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment-dim);}
+
+  /* ---------- GRILL SPOTLIGHT ---------- */
+  .grill{
+    position:relative;
+    background:linear-gradient(180deg,#1b120c,#150e08 60%, #130d07);
+    overflow:hidden;
+  }
+  .ember-blob{
+    position:absolute; border-radius:50%; filter:blur(70px);
+    background:radial-gradient(circle, rgba(224,96,60,0.55), transparent 70%);
+    animation:flicker 5s ease-in-out infinite;
+  }
+  .ember-blob.b1{width:420px; height:420px; top:-100px; left:-100px; animation-delay:0s;}
+  .ember-blob.b2{width:320px; height:320px; bottom:-80px; right:5%; animation-delay:1.4s;}
+  @keyframes flicker{
+    0%,100%{opacity:0.55; transform:scale(1);} 
+    50%{opacity:0.85; transform:scale(1.12);} 
+  }
+  .grill-grid{position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .grill h2{color:var(--parchment);} 
+  .grill p.lede{margin-top:22px; font-size:16px; max-width:480px;}
+  .menu-list{margin-top:34px; display:flex; flex-direction:column;}
+  .menu-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    font-family:var(--serif); font-size:18px; color:var(--parchment);
+  }
+  .menu-row span.mp{font-family:var(--sans); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass);} 
+  .flame-wrap{display:flex; justify-content:center;}
+  .flame-svg{width:min(320px,90%); animation:flamepulse 3s ease-in-out infinite;}
+  @keyframes flamepulse{0%,100%{transform:scale(1);}50%{transform:scale(1.035);} }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .test-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:26px; margin-top:60px;}
+  .test-card{
+    position:relative;
+    background:linear-gradient(160deg,#241b11,#1a1409);
+    border:1px solid var(--line);
+    padding:32px;
+  }
+  .test-card::before{content:""; position:absolute; top:-1px; left:32px; right:32px; border-top:1px dashed var(--brass-dim);}
+  .stars{display:flex; gap:4px; margin-bottom:16px;}
+  .stars svg{width:15px; height:15px; color:var(--brass);}
+  .test-card p.quote{font-family:var(--serif); font-size:18px; color:var(--parchment); line-height:1.5;}
+  .test-card .attrib{margin-top:18px; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--brass);}
+
+  /* ---------- VISIT ---------- */
+  .visit-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:center;}
+  .hours-table{margin-top:30px; width:100%; border-collapse:collapse;}
+  .hours-table tr{border-bottom:1px solid var(--line);} 
+  .hours-table td{padding:12px 0; font-size:14px; color:var(--parchment-dim);} 
+  .hours-table td:last-child{text-align:right; color:var(--parchment); font-family:var(--serif);} 
+  .addr-block{margin-top:26px; font-size:15px; color:var(--parchment-dim); line-height:1.7;} 
+  .addr-block b{color:var(--parchment); font-weight:500;}
+  .visit-cta{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;}
+  .map-frame{
+    position:relative; border:1px solid var(--line);
+    aspect-ratio:4/3.2;
+    background:linear-gradient(160deg,#211910,#171109);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .map-frame svg{width:100%; height:100%; opacity:0.9;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink-2); border-top:1px solid var(--line); padding-top:80px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px;}
+  .footer-brand .brand-mark{width:46px; height:46px; margin-bottom:16px;}
+  .footer-brand .name{font-family:var(--serif); font-size:19px;}
+  .footer-arabic{font-family:var(--arabic); font-size:20px; color:var(--brass); margin-top:8px;}
+  .footer-brand p{margin-top:16px; font-size:13.5px; max-width:260px;}
+  .footer-col h4{font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--brass); margin-bottom:18px;}
+  .footer-col a, .footer-col li{font-size:13.5px; color:var(--parchment-dim); display:block; margin-bottom:12px;}
+  .footer-col a:hover{color:var(--parchment);}
+  .footer-bottom{
+    margin-top:60px; padding:26px 0; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-size:12px; color:var(--parchment-dim); letter-spacing:0.04em;
+  }
+  .socials{display:flex; gap:16px;}
+  .socials a{width:34px; height:34px; border:1px solid var(--brass-dim); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:border-color .3s ease, background .3s ease;}
+  .socials a:hover{border-color:var(--brass-bright); background:rgba(201,151,62,0.1);}
+  .socials svg{width:15px; height:15px; color:var(--brass);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .ticket-float{justify-self:start; transform:rotate(-1.5deg); margin-top:50px;}
+    .trust-grid{grid-template-columns:repeat(2,1fr);} 
+    .trust-item:nth-child(3){border-left:none;}
+    .story-grid{grid-template-columns:1fr; gap:40px;}
+    .dept-grid{grid-template-columns:repeat(2,1fr);} 
+    .grill-grid{grid-template-columns:1fr; gap:40px;}
+    .grill-grid .flame-wrap{order:-1;}
+    .test-grid{grid-template-columns:1fr;}
+    .visit-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:36px;}
+  }
+  @media (max-width:560px){
+    .dept-grid{grid-template-columns:1fr;}
+    .section{padding:80px 0;}
+    .hero{padding-top:110px;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <nav class="wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="#c9973e" stroke-width="1"/>
+        <path d="M30 10 L34 24 L48 24 L37 33 L41 47 L30 38 L19 47 L23 33 L12 24 L26 24 Z" stroke="#e3b968" stroke-width="1" fill="none"/>
+        <text x="30" y="34" text-anchor="middle" font-family="Marcellus, serif" font-size="13" fill="#e3b968">NM</text>
+      </svg>
+      <div class="brand-text">
+        <span class="name">New Middle East Market</span>
+        <span class="est">Est. 1992 · Ottawa</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#story">Our Story</a>
+      <a href="#departments">Departments</a>
+      <a href="#grill">The Grill</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit Us</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#visit" class="btn btn-ghost" style="padding:11px 22px;">Get Directions</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="#story">Our Story</a>
+  <a href="#departments">Departments</a>
+  <a href="#grill">The Grill</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#visit">Visit Us</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Ottawa's Halal Market Since 1992</span>
+      <h1>Fresh cut.<br>Fire grilled.<br><em>Family run.</em></h1>
+      <p class="lede">Three decades of halal butchery, scratch-made kebab, and a pantry stocked like a souk — all under one roof, run by the same family that opened the doors.</p>
+      <div class="hero-cta">
+        <a href="#departments" class="btn btn-brass">See What's Inside</a>
+        <a href="#visit" class="btn btn-ghost">Get Directions</a>
+      </div>
+      <div class="hero-seal">
+        <div class="seal-ring"><span>EST.<br>1992</span></div>
+        <div class="seal-text"><b>Family owned, halal certified,</b> and still run by the people who started it.</div>
+      </div>
+    </div>
+    <div class="ticket-float reveal">
+      <span class="tf-eyebrow">Now Serving</span>
+      <div class="tf-number">No. 001</div>
+      <div class="ticket-dash"></div>
+      <div class="tf-note">Fresh meat cut daily. Grill fired every morning. Take a number — or don't, we probably know your order already.</div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><div class="trust-num">30+</div><div class="trust-label">Years in Ottawa</div></div>
+    <div class="trust-item"><div class="trust-num">100%</div><div class="trust-label">Halal, Always</div></div>
+    <div class="trust-item"><div class="trust-num">7x</div><div class="trust-label">Weekly Meat Deliveries</div></div>
+    <div class="trust-item"><div class="trust-num">1,000s</div><div class="trust-label">Regulars Who Never Left</div></div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="section" id="story">
+  <div class="wrap story-grid">
+    <div class="story-copy reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>A souk, a butcher shop, and a kitchen — built by one family</h2>
+      <p>Since 1992, generations of Ottawa families have crossed our threshold for the same reason their parents did: a butcher counter that treats every cut like it's for their own table, a grill that never stops smoking, and shelves stacked floor to ceiling with the spices, cheeses, and breads of home.</p>
+      <p>We're not a chain, and we never wanted to be. We're the shop where the person behind the counter remembers your order before you finish asking — and where "we're out of that" is answered with "let me check in the back."</p>
+      <div class="pull-quote">"Ask for Ahmed at the grill. Ask for Mustafa at the counter. Everyone who shops here has a regular."</div>
+    </div>
+    <div class="story-panels reveal">
+      <div class="story-panel">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="#c9973e" stroke-width="1.3"><path d="M8 28 L26 10 a4 4 0 0 1 6 6 L14 34 Z"/><path d="M6 30 L10 34"/></svg>
+        <div><h3>The Butcher Counter</h3><span>Whole cuts, ground-to-order, never frozen-and-forgotten.</span></div>
+      </div>
+      <div class="story-panel">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="#c9973e" stroke-width="1.3"><path d="M20 6c4 6-2 7-2 12a6 6 0 1 0 12 0c0-3-2-4-2-7 4 2 6 6 6 10a10 10 0 0 1-20 0c0-6 4-8 6-15Z"/></svg>
+        <div><h3>The Grill</h3><span>Charcoal-fired, hand-packed skewers, marinated in-house.</span></div>
+      </div>
+      <div class="story-panel">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="#c9973e" stroke-width="1.3"><rect x="12" y="10" width="16" height="22" rx="2"/><path d="M16 10V7a4 4 0 0 1 8 0v3"/><path d="M12 18h16"/></svg>
+        <div><h3>The Pantry</h3><span>A wall of spice, rice, oil and olives deep enough to stock a restaurant.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPARTMENTS ============ -->
+<section class="section section-tight" id="departments" style="background:var(--ink-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow" style="justify-content:center;">What's Inside</span>
+      <h2>Four departments, one standard</h2>
+    </div>
+    <div class="dept-grid reveal">
+      <div class="ticket-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 28 L26 10 a4 4 0 0 1 6 6 L14 34 Z"/><path d="M6 30 L10 34"/></svg>
+        <div class="tno">Ticket No. 01</div>
+        <h3>Halal Butcher</h3>
+        <p>Beef, lamb, goat and chicken, cut fresh behind the glass and ground to order — exactly the way you'd want it at home.</p>
+        <div class="perf">Fresh · Daily · Halal Certified</div>
+      </div>
+      <div class="ticket-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 6c4 6-2 7-2 12a6 6 0 1 0 12 0c0-3-2-4-2-7 4 2 6 6 6 10a10 10 0 0 1-20 0c0-6 4-8 6-15Z"/></svg>
+        <div class="tno">Ticket No. 02</div>
+        <h3>Grill &amp; Rotisserie</h3>
+        <p>Kebab, kofta, shish tawook and rotisserie chicken — marinated in-house and grilled to order, not held under a heat lamp.</p>
+        <div class="perf">Call Ahead · Ready in Minutes</div>
+      </div>
+      <div class="ticket-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="12" y="10" width="16" height="22" rx="2"/><path d="M16 10V7a4 4 0 0 1 8 0v3"/><path d="M12 18h16"/></svg>
+        <div class="tno">Ticket No. 03</div>
+        <h3>Spice &amp; Pantry</h3>
+        <p>Rows of spice, rice, oils, olives and preserves deep enough that local restaurants stock their kitchens here too.</p>
+        <div class="perf">Bulk Available</div>
+      </div>
+      <div class="ticket-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 22c0-8 6-14 14-14s14 6 14 14"/><path d="M6 22h28"/><path d="M10 22c2 4 5 6 10 6s8-2 10-6"/></svg>
+        <div class="tno">Ticket No. 04</div>
+        <h3>Bakery &amp; Produce</h3>
+        <p>Fresh flatbread baked on-site, seasonal produce, and the dairy staples every Middle Eastern kitchen runs on.</p>
+        <div class="perf">Baked Fresh Daily</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRILL SPOTLIGHT ============ -->
+<section class="section grill" id="grill">
+  <div class="ember-blob b1"></div>
+  <div class="ember-blob b2"></div>
+  <div class="wrap grill-grid">
+    <div class="reveal">
+      <span class="eyebrow">The Grill</span>
+      <h2>Kebab that built a reputation</h2>
+      <p class="lede">For over two decades, our charcoal grill has been the reason people cross town. Every skewer is hand-packed and seasoned in-house, then fire-grilled to order. Call ahead and it'll be waiting when you walk in.</p>
+      <div class="menu-list">
+        <div class="menu-row"><span>Beef Kofta Skewers</span><span class="mp">Market Price</span></div>
+        <div class="menu-row"><span>Shish Tawook (Chicken)</span><span class="mp">Market Price</span></div>
+        <div class="menu-row"><span>Lamb Kabob</span><span class="mp">Market Price</span></div>
+        <div class="menu-row"><span>Whole Rotisserie Chicken</span><span class="mp">Market Price</span></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#visit" class="btn btn-brass">Call Ahead to Order</a>
+      </div>
+    </div>
+    <div class="flame-wrap reveal">
+      <svg class="flame-svg" viewBox="0 0 300 340" fill="none">
+        <path d="M150 10c30 50-20 60-20 100a50 50 0 1 0 100 0c0-25-15-35-15-55 30 18 50 50 50 85a95 95 0 0 1-190 0c0-55 40-70 75-130Z" stroke="#e0603c" stroke-width="1.4" fill="rgba(224,96,60,0.06)"/>
+        <path d="M150 90c14 24-8 30-8 48a24 24 0 1 0 48 0c0-12-7-17-7-27 14 9 24 24 24 41a45 45 0 0 1-90 0c0-26 18-34 33-62Z" stroke="#c9973e" stroke-width="1.1" fill="rgba(201,151,62,0.08)"/>
+        <g stroke="#8a6b2c" stroke-width="1">
+          <line x1="70" y1="300" x2="230" y2="300"/>
+          <line x1="90" y1="310" x2="210" y2="310"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow" style="justify-content:center;">Word on the Street</span>
+      <h2>Ottawa's been coming back for thirty years</h2>
+    </div>
+    <div class="test-grid reveal">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Twenty years of Saturday mornings here and the counter still remembers my order before I ask."</p>
+        <div class="attrib">— Layla R., Regular Since 2004</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"The grill is the real destination. I haven't had kofta this good outside of Beirut."</p>
+        <div class="attrib">— Marcus T., Ottawa</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"It's the only place in the city that carries everything my grandmother's recipes call for."</p>
+        <div class="attrib">— Nadia H., Local Guide</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Ask for Mustafa at the meat counter — he'll find you the exact cut you actually wanted."</p>
+        <div class="attrib">— Karim S., Weekly Customer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="section section-tight" id="visit" style="background:var(--ink-2); border-top:1px solid var(--line);">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="eyebrow">Visit Us</span>
+      <h2>Come hungry, leave with a full cart</h2>
+      <div class="addr-block">
+        <b>New Middle East Market</b><br>
+        1755 Bank St, Ottawa, ON&nbsp;&nbsp;K1V 7W4<br>
+        (613) 526-3423
+      </div>
+      <table class="hours-table">
+        <tr><td>Monday – Friday</td><td>9:00 AM – 9:00 PM</td></tr>
+        <tr><td>Saturday</td><td>9:00 AM – 9:00 PM</td></tr>
+        <tr><td>Sunday</td><td>9:00 AM – 9:00 PM</td></tr>
+      </table>
+      <div class="visit-cta">
+        <a href="#" class="btn btn-brass">Get Directions</a>
+        <a href="#" class="btn btn-ghost">Call the Store</a>
+      </div>
+    </div>
+    <div class="map-frame reveal">
+      <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="320" fill="#191309"/>
+        <g stroke="#8a6b2c" stroke-width="1" opacity="0.55">
+          <line x1="0" y1="60" x2="400" y2="40"/>
+          <line x1="0" y1="160" x2="400" y2="180"/>
+          <line x1="0" y1="260" x2="400" y2="240"/>
+          <line x1="80" y1="0" x2="60" y2="320"/>
+          <line x1="220" y1="0" x2="260" y2="320"/>
+          <line x1="340" y1="0" x2="320" y2="320"/>
+        </g>
+        <circle cx="212" cy="150" r="7" fill="#e0603c"/>
+        <path d="M212 150 c0 -26 26 -26 26 0 c0 20 -26 40 -26 40 s-26 -20 -26 -40 c0 -26 26 -26 26 0" fill="none" stroke="#e0603c" stroke-width="1.6" transform="translate(0,-22)"/>
+        <text x="200" y="220" text-anchor="middle" font-family="Jost, sans-serif" font-size="11" letter-spacing="2" fill="#cfc0a4">FIND US ON MERIVALE RD</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="28" stroke="#c9973e" stroke-width="1"/>
+          <path d="M30 10 L34 24 L48 24 L37 33 L41 47 L30 38 L19 47 L23 33 L12 24 L26 24 Z" stroke="#e3b968" stroke-width="1" fill="none"/>
+        </svg>
+        <div class="name">New Middle East Market</div>
+        <div class="footer-arabic">سوق الشرق الأوسط الجديد</div>
+        <p>Ottawa's halal butcher, grill and pantry since 1992. Family owned, three decades running.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#story">Our Story</a>
+        <a href="#departments">Departments</a>
+        <a href="#grill">The Grill</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+      <div class="footer-col">
+        <h4>Departments</h4>
+        <a href="#departments">Halal Butcher</a>
+        <a href="#grill">Grill &amp; Rotisserie</a>
+        <a href="#departments">Spice &amp; Pantry</a>
+        <a href="#departments">Bakery &amp; Produce</a>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <li>1755 Bank St</li>
+        <li>Ottawa, ON K1V 7W4</li>
+        <li>(613) 526-3423</li>
+        <li>Open 9 AM – 9 PM Daily</li>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 New Middle East Market. Crafted with love in Ottawa.</span>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 8h-2a2 2 0 0 0-2 2v10M9 13h6"/><circle cx="12" cy="12" r="9"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile nav
+  const burger = document.getElementById('burgerBtn');
+  const panel = document.getElementById('mobilePanel');
+  const closeBtn = document.getElementById('mobileClose');
+  burger.addEventListener('click', () => panel.classList.add('open'));
+  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => panel.classList.remove('open')));
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
